@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -20,21 +20,22 @@ jobs:
           java-version: "17"
           distribution: temurin
 
-      - name: Setup Gradle
+      - name: Setup Gradle 8.9
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.9"
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       - name: Create local.properties
         run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
 
       - name: Build debug APK
-        run: ./gradlew assembleGoogleDebug --stacktrace --no-daemon
+        run: gradle assembleGoogleDebug --stacktrace --no-daemon
         env:
           GRADLE_OPTS: "-Xmx4g -XX:+HeapDumpOnOutOfMemoryError"
+
+      - name: List APK output
+        if: always()
+        run: find app/build/outputs -name "*.apk" 2>/dev/null || echo "No APKs found"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
