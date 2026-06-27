@@ -1,0 +1,1 @@
+NOTICEThis software includes code modified from Aniyomi, availableat https://github.com/aniyomiorg/aniyomi/.

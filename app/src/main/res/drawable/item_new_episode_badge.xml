@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Background for the "NEW EP" badge on media cards.
+    Positioned at top|start: only the top-right corner is rounded inward
+    to match the card's corner radius. Mirrors item_score.xml which sits
+    at top|end with its top-left corner rounded.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#E53935" />
+    <corners android:topRightRadius="20dp" android:bottomRightRadius="10dp" />
+</shape>
