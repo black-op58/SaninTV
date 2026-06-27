@@ -21,6 +21,15 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Bootstrap Gradle wrapper JAR
+        run: |
+          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
+            echo "Downloading gradle-wrapper.jar..."
+            mkdir -p gradle/wrapper
+            curl -sL -o gradle/wrapper/gradle-wrapper.jar \
+              "https://raw.githubusercontent.com/gradle/gradle/v8.9.0/gradle/wrapper/gradle-wrapper.jar"
+          fi
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
